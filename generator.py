@@ -109,7 +109,7 @@ def generation_function(texts, lang="en"):
     cook_image = generate_cook_image(
         generated_recipe['title'], app_id=api_credentials['ID'], app_key=api_credentials['KEY'])
 
-    # generated_recipe["image"] = cook_image
+    generated_recipe["image"] = cook_image
 
     return generated_recipe
 
