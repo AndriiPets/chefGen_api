@@ -19,7 +19,11 @@ def generate():
 
     text = request_data['prompt']
 
-    generated_recepie = generation_function(text)
+    if request_data.get("lang"):
+        generated_recepie = generation_function(
+            text, lang=request_data["lang"])
+    else:
+        generated_recepie = generation_function(text)
 
     return generated_recepie
 

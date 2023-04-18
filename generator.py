@@ -9,6 +9,7 @@ import os
 
 from utils.api import generate_cook_image
 from utils.translators.translate_recepie import translate_recepie
+from utils.translators.translate_input import translate_input
 
 
 model_name_or_path = "flax-community/t5-recipe-generation"
@@ -85,9 +86,12 @@ def skip_special_tokens_and_prettify(text):
     return data
 
 
-def generation_function(texts, lang="ru"):
+def generation_function(texts, lang="en"):
 
     langs = ['ru', 'en']
+
+    if lang != "en" and lang in langs:
+        texts = translate_input(texts, lang)
 
     output_ids = generator(
         texts,
@@ -99,7 +103,7 @@ def generation_function(texts, lang="ru"):
     generated_recipe = skip_special_tokens_and_prettify(recipe)
 
     if lang != "en" and lang in langs:
-        generated_recipe = translate_recepie(generated_recipe)
+        generated_recipe = translate_recepie(generated_recipe, lang)
 
     api_credentials = load_api()
     cook_image = generate_cook_image(
