@@ -1,4 +1,7 @@
-transformers
-flask
-torch
-flask-cors
+Flask==2.2.3
+Flask_Cors==3.0.10
+python-decouple==3.8
+Requests==2.28.2
+transformers==4.27.4
+sacremoses==0.0.53
+torch==2.0.0
